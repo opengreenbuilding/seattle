@@ -2,7 +2,6 @@ const fs = require("fs");
 const Json2csvTransform = require("json2csv").Transform;
 const _ = require("underscore");
 const async = require("async");
-const test = require("./test.json");
 const argv = process.argv.slice(2);
 const CITY_BUILDINGS_OBJECT = require("./" + argv[0]);
 
@@ -27,10 +26,10 @@ function createNewCityBuildingsObject(cityBuildingsObject) {
 
 function CSVify() {
   const input = fs.createReadStream(
-    __dirname + "/updated_covered_buildings.json",
+    __dirname + "/updated_springfield.json",
     { encoding: "utf8" }
   );
-  const output = fs.createWriteStream(__dirname + "/test2.csv", {
+  const output = fs.createWriteStream(__dirname + "/updated_covered_buildings.csv", {
     encoding: "utf8"
   });
   const json2csv = new Json2csvTransform();
@@ -40,7 +39,7 @@ function CSVify() {
 }
 
 fs.writeFile(
-  "./updated_richmond.json",
+  "./updated_springfield.json",
   JSON.stringify(createNewCityBuildingsObject(CITY_BUILDINGS_OBJECT)),
   err => {
     if (err) {

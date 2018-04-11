@@ -1,51 +1,62 @@
-const fs = require("fs");
-const Json2csvTransform = require("json2csv").Transform;
-const _ = require("underscore");
 const async = require("async");
+const _ = require("underscore");
+const json2csv = require("json2csv");
+const moment = require("moment")
 const argv = process.argv.slice(2);
-const CITY_BUILDINGS_OBJECT = require("./" + argv[0]);
+const BUILDINGS = require("./" + argv[0]);
 
-function generateEuiValue() {
-  return Math.floor(Math.random() * 100);
-}
-function generateEnergyStarScore() {
-  return Math.floor(Math.random() * 100);
-}
-function generateGreenhouseGasValue() {
-  return Math.floor(Math.random() * 100);
+
+function randomNumber(min, max) {
+    return Math.floor(Math.random() * (max - min + 1) + min);
 }
 
-function createNewCityBuildingsObject(cityBuildingsObject) {
-  cityBuildingsObject.map(building => {
-    (building.EUI = generateEuiValue()),
-      (building.ENERGY_STAR_SCORE = generateEnergyStarScore()),
-      (building.GREENHOUSE_GAS_EMISSIONS = generateGreenhouseGasValue());
-  });
-  return cityBuildingsObject;
+function initialRead(cb) {
+    console.log("Reading data...")
+    const buildingJSON = BUILDINGS.map(building => {
+        return building
+    })
+    cb(null, buildingJSON);
 }
 
-function CSVify() {
-  const input = fs.createReadStream(
-    __dirname + "/updated_springfield.json",
-    { encoding: "utf8" }
-  );
-  const output = fs.createWriteStream(__dirname + "/updated_covered_buildings.csv", {
-    encoding: "utf8"
-  });
-  const json2csv = new Json2csvTransform();
-
-  const processor = input.pipe(json2csv).pipe(output);
-  console.log("File has been created");
+function generateBuildingObject(buildingJSON, cb) {
+    console.log("Compiling building object...")
+    let dataset = buildingJSON.map(building => {
+      return {...building,
+        EUI: randomNumber(1, 100),
+        ENERGY_STAR_SCORE: randomNumber(1, 100),
+        GREENHOUSE_GAS_EMISSIONS: randomNumber(1, 100)
+       }
+    })
+    cb(null, dataset);
 }
 
-fs.writeFile(
-  "./updated_springfield.json",
-  JSON.stringify(createNewCityBuildingsObject(CITY_BUILDINGS_OBJECT)),
-  err => {
-    if (err) {
-      console.error(err);
-      return;
+function CSVify(dataset, cb) {
+    console.log("Generating CSV")
+    const fields = _.keys(dataset[0]); 
+    const csv = json2csv({ data: dataset, fields: fields },
+        function (err, csv) {
+            console.log("CSV has been reated...");
+            cb(err, csv);
+        }
+    )
+}
+
+async.waterfall([
+    initialRead,
+    generateBuildingObject,
+    CSVify
+], 
+    function(err, result) {
+        if (err) {
+            throw err;
+        }
+        console.log("finished report pipeline");
+        console.log("writing report to stdout");
+        process.stdout.write("# Generated at " + moment.utc().toISOString());
+        process.stdout.write("\n");
+        process.stdout.write(result);
+        process.stdout.write("\n");
+        process.exit(0);
     }
-    CSVify();
-  }
 );
+

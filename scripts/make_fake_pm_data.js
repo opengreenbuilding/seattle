@@ -1,10 +1,9 @@
 const async = require("async");
+const fs = require("fs");
 const _ = require("underscore");
 const json2csv = require("json2csv");
-const moment = require("moment")
 const argv = process.argv.slice(2);
 const BUILDINGS = require("./" + argv[0]);
-
 
 function randomNumber(min, max) {
     return Math.floor(Math.random() * (max - min + 1) + min);
@@ -86,32 +85,33 @@ function normalizeBuildingData(dataset, cb) {
 
 function CSVify(normalizedBuildingsObj, cb) {
     console.log("Generating CSV")
-    const fields = _.keys(normalizedBuildingsObj[0]); 
-    const csv = json2csv({ data: normalizedBuildingsObj, fields: fields },
-        function (err, csv) {
-            console.log("CSV has been reated...");
-            cb(err, csv);
+    const fields = _.keys(normalizedBuildingsObj[0]);
+    const csv = json2csv({ data: normalizedBuildingsObj, fields: fields });
+    cb(null, csv);
+}
+
+function writeToCsv(csv, cb) {
+    fs.writeFile(`${argv[1]}`, csv, 'utf8', (err) => {
+        if (err) {
+            throw err;
         }
-    )
+        console.log('The file has been saved!');
+    }),
+    function(err, result) {
+        if (err) throw err;
+        cb(null, result);
+    }
 }
 
 async.waterfall([
     initialRead,
     generateBuildingObject,
     normalizeBuildingData,
-    CSVify
+    CSVify,
+    writeToCsv
 ], 
-    function(err, result) {
-        if (err) {
-            throw err;
-        }
-        console.log("finished report pipeline");
-        console.log("writing report to stdout");
-        process.stdout.write("# Generated at " + moment.utc().toISOString());
-        process.stdout.write("\n");
-        process.stdout.write(result);
-        process.stdout.write("\n");
-        process.exit(0);
+function(err) {
+        if (err) throw err;
     }
 );
 

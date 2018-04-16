@@ -1,0 +1,8 @@
+{
+  "dependencies": {
+    "async": "^2.6.0",
+    "json2csv": "^3.0.0",
+    "moment": "^2.22.0",
+    "underscore": "^1.8.3"
+  }
+}

@@ -77,10 +77,23 @@ function normalizeBuildingData(dataset, cb) {
     let normalizedBuildingsObj = dataset.map(building => {
         return {
             ...building,
-            LAT_LONG: [shiftCoordinates(building.LAT_LONG[0], 3), shiftCoordinates(building.LAT_LONG[1], -3)],
-            EUI: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI)),
-            ENERGY_STAR_SCORE: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI)),
-            GREENHOUSE_GAS_EMISSIONS: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI))
+            latitude: shiftCoordinates(building.LAT_LONG[0], 3),
+            longitude: shiftCoordinates(building.LAT_LONG[1], -3),
+            city: "Springfield",
+            year: 2016,
+            reported_address: building.PROPERTY_ADDRESS,
+            property_type: building.PRIMARY_USE,
+            property_name: building.NOTES,
+            numunits: randomNumber(1, 100),
+            numfloors: Number(building.FLOORS),
+            numbuildings: Number(building.PROPERTY_BUILDINGS),
+            yearbuilt: Number(building.YEAR_BUILT),
+            reported_gross_floor_area: Number(building.APPROX_BUILDING_AREA.split(",").join("")),
+            site_eui: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI)),
+            source_eui: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI)),
+            energy_star_score: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI)),
+            total_ghg_emissions: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI)),
+            total_ghg_emissions_intensity: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI))
         }
     })
     

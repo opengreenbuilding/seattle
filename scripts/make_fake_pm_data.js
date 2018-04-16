@@ -13,6 +13,9 @@ function randomNumberOfStandardDeviations(min, max) {
     return ((Math.random() * (max - min + 1) + min))
 }
 
+function shiftCoordinates(coordinate, shiftValue) {
+    return (coordinate - shiftValue);
+}
 
 function standardDeviation(mean, dataArray, numberOfEntries) {
     let sumDistanceFromMean = 0 
@@ -74,6 +77,7 @@ function normalizeBuildingData(dataset, cb) {
     let normalizedBuildingsObj = dataset.map(building => {
         return {
             ...building,
+            LAT_LONG: [shiftCoordinates(building.LAT_LONG[0], 3), shiftCoordinates(building.LAT_LONG[1], -3)],
             EUI: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI)),
             ENERGY_STAR_SCORE: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI)),
             GREENHOUSE_GAS_EMISSIONS: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI))

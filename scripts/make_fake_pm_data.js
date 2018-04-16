@@ -1,16 +1,20 @@
 const async = require("async");
-const fs = require("fs");
 const _ = require("underscore");
 const json2csv = require("json2csv");
 const argv = process.argv.slice(2);
 const BUILDINGS = require("./" + argv[0]);
 
+// Math Functions
 function randomNumber(min, max) {
-    return Math.floor(Math.random() * (max - min + 1) + min);
+    return (Math.random() * (max - min + 1) + min);
 }
 
-function randomNumberOfStandardDeviations(min, max) {
-    return ((Math.random() * (max - min + 1) + min))
+function valueXStdDevFromMean(mean, stdDev) {
+    if (Math.sign(randomNumber(-1, 1)) === -1) {
+        return (Math.round(mean + (randomNumber(-1, 2) * stdDev)));
+    } else {
+        return (Math.round((randomNumber(-1, 1) * stdDev) + mean));
+    };
 }
 
 function shiftCoordinates(coordinate, shiftValue) {
@@ -27,53 +31,58 @@ function standardDeviation(mean, dataArray, numberOfEntries) {
     return stdDev;
 }
 
-function initialRead(cb) {
-    console.log("Reading data...")
-    const buildingJSON = BUILDINGS.map(building => {
-        return building
-    })
-    cb(null, buildingJSON);
-}
-
-function generateBuildingObject(buildingJSON, cb) {
-    console.log("Compiling building object...")
-    let dataset = buildingJSON.map(building => {
+//Waterfall
+function generateBuildingObject(cb) {
+    let dataset = BUILDINGS.map(building => {
       return {...building,
-        EUI: randomNumber(1, 100),
-        ENERGY_STAR_SCORE: randomNumber(1, 100),
-        GREENHOUSE_GAS_EMISSIONS: randomNumber(1, 100)
+        site_eui: Math.floor(randomNumber(1, 100)),
+        source_eui: Math.floor(randomNumber(1, 100)),
+        energy_star_score: Math.floor(randomNumber(1, 100)),
+        total_ghg_emissions: Math.floor(randomNumber(1, 100)),
+        total_ghg_emissions_intensity: Math.floor(randomNumber(1, 100))
        }
     })
     cb(null, dataset);
 }
 
 function normalizeBuildingData(dataset, cb) {
-    let sumEUI = 0;
+    let sumSiteEui = 0;
+    let sumSourceEui = 0;
     let sumEnergyStar = 0;
-    let sumGreenhouseGas = 0;
+    let sumGhgEmissions = 0;
+    let sumGhgIntensity = 0;
 
-    let dataEUI = [];
+    let dataSiteEui = [];
+    let dataSourceEui = [];
     let dataEnergyStar = [];
-    let dataGreenhouseGas = [];
+    let dataGhgEmissions = [];
+    let dataGhgIntensity = [];
 
     dataset.map(building => {
-        sumEUI += building.EUI;
-        sumEnergyStar += building.ENERGY_STAR_SCORE;
-        sumGreenhouseGas += building.GREENHOUSE_GAS_EMISSIONS;
+        sumSiteEui += building.site_eui;
+        sumSourceEui += building.source_eui;
+        sumEnergyStar += building.energy_star_score;
+        sumGhgEmissions += building.total_ghg_emissions;
+        sumGhgIntensity += building.total_ghg_emissions_intensity;
 
-        dataEUI.push(building.EUI);
-        dataEnergyStar.push(building.ENERGY_STAR_SCORE);
-        dataGreenhouseGas.push(building.GREENHOUSE_GAS_EMISSIONS);
+        dataSiteEui.push(building.site_eui);
+        dataSourceEui.push(building.source_eui);
+        dataEnergyStar.push(building.energy_star_score);
+        dataGhgEmissions.push(building.total_ghg_emissions);
+        dataGhgIntensity.push(building.total_ghg_emissions_intensity);
     })
 
-    let meanEUI = Math.round((sumEUI / dataset.length))
-    let meanEnergyStar = Math.round((sumEnergyStar / dataset.length))
-    let meanGreenhouseGas = Math.round((sumGreenhouseGas / dataset.length))
+    let meanSiteEui = Math.round((sumSiteEui / dataset.length));
+    let meanSourceEui = Math.round((sumSourceEui / dataset.length));
+    let meanEnergyStar = Math.round((sumEnergyStar / dataset.length));
+    let meanGhgEmissions = Math.round((sumGhgEmissions / dataset.length));
+    let meanGhgIntensity = Math.round((sumGhgIntensity / dataset.length));
 
-    let stdDevEUI = standardDeviation(meanEUI, dataEUI, dataset.length)
-    let stdDevEnergyStar = standardDeviation(meanEnergyStar, dataEnergyStar, dataset.length)
-    let stdDevGreenhouseGas = standardDeviation(meanGreenhouseGas, dataGreenhouseGas, dataset.length)
-
+    let stdDevSite_Eui = standardDeviation(meanSiteEui, dataSiteEui, dataset.length);
+    let stdDevSourceEui = standardDeviation(meanSourceEui, dataSourceEui, dataset.length);
+    let stdDevEnergyStar = standardDeviation(meanEnergyStar, dataEnergyStar, dataset.length);
+    let stdDevGhgEmissions = standardDeviation(meanGhgEmissions, dataGhgEmissions, dataset.length);
+    let stdDevGhgIntensity = standardDeviation(meanGhgIntensity, dataGhgIntensity, dataset.length);
     let normalizedBuildingsObj = dataset.map(building => {
         return {
             ...building,
@@ -84,51 +93,38 @@ function normalizeBuildingData(dataset, cb) {
             reported_address: building.PROPERTY_ADDRESS,
             property_type: building.PRIMARY_USE,
             property_name: building.NOTES,
-            numunits: randomNumber(1, 100),
+            numunits: Math.floor(randomNumber(1, 100)),
             numfloors: Number(building.FLOORS),
             numbuildings: Number(building.PROPERTY_BUILDINGS),
             yearbuilt: Number(building.YEAR_BUILT),
             reported_gross_floor_area: Number(building.APPROX_BUILDING_AREA.split(",").join("")),
-            site_eui: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI)),
-            source_eui: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI)),
-            energy_star_score: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI)),
-            total_ghg_emissions: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI)),
-            total_ghg_emissions_intensity: (Math.sign(randomNumberOfStandardDeviations(-1, 1)) === -1) ? (Math.round(meanEUI + (randomNumberOfStandardDeviations(-1, 2) * stdDevEUI))) : (Math.round((randomNumberOfStandardDeviations(-1, 1) * stdDevEUI) + meanEUI))
-        }
+            site_eui: valueXStdDevFromMean(meanSiteEui, stdDevSite_Eui),
+            source_eui: valueXStdDevFromMean(meanSourceEui, stdDevSourceEui),
+            energy_star_score: valueXStdDevFromMean(meanEnergyStar, stdDevEnergyStar),
+            total_ghg_emissions: valueXStdDevFromMean(meanGhgEmissions, stdDevGhgEmissions),
+            total_ghg_emissions_intensity: valueXStdDevFromMean(meanGhgIntensity, stdDevGhgIntensity),
+        };
     })
     
     cb(null, normalizedBuildingsObj)
 }
 
 function CSVify(normalizedBuildingsObj, cb) {
-    console.log("Generating CSV")
     const fields = _.keys(normalizedBuildingsObj[0]);
     const csv = json2csv({ data: normalizedBuildingsObj, fields: fields });
     cb(null, csv);
 }
 
-function writeToCsv(csv, cb) {
-    fs.writeFile(`${argv[1]}`, csv, 'utf8', (err) => {
+async.waterfall([
+    generateBuildingObject,
+    normalizeBuildingData,
+    CSVify
+], 
+function(err, csv) {
         if (err) {
             throw err;
         }
-        console.log('The file has been saved!');
-    }),
-    function(err, result) {
-        if (err) throw err;
-        cb(null, result);
-    }
-}
-
-async.waterfall([
-    initialRead,
-    generateBuildingObject,
-    normalizeBuildingData,
-    CSVify,
-    writeToCsv
-], 
-function(err) {
-        if (err) throw err;
+        process.stdout.write(csv)  
     }
 );
 

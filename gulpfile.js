@@ -25,6 +25,12 @@ var options = {
 
 fancyLog('Using city', chalk.magenta(options.city));
 
+gulp.task('which-city', function () {
+  return gulp.src('src/app/router.mustache')
+    .pipe(mustache({ CITY: options.city }, { extension: '.js' }))
+    .pipe(gulp.dest('src/app/'));
+});
+
 gulp.task('fileinclude', function() {
   return  gulp.src(['src/index.html', 'src/iframe.html', 'src/CNAME'])
     .pipe(gulp.dest('dist'));
@@ -37,7 +43,7 @@ gulp.task('templates', function() {
 
 gulp.task('theme', function () {
   return gulp.src('src/styles/main.mustache')
-    .pipe(mustache({CITY: options.city}, {extension:'.scss'}))
+    .pipe(mustache({ CITY: options.city }, {extension:'.scss'}))
     .pipe(gulp.dest('src/styles/'));
 });
 
@@ -91,7 +97,7 @@ gulp.task('copy-lib', function() {
 // Default task
 gulp.task('default', ['clean'], function() {
   //gulp.start('scripts');
-  gulp.start('fileinclude', 'theme', 'styles', 'scripts', 'images', 'templates', 'cities_config', 'copy-lib');
+  gulp.start('fileinclude', 'which-city', 'theme', 'styles', 'scripts', 'images', 'templates', 'cities_config', 'copy-lib');
 });
 
 gulp.task('connect', function() {

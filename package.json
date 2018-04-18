@@ -5,7 +5,7 @@
   "main": "gulpfile.js",
   "scripts": {
     "test": "jasmine",
-    "watch": "gulp watch",
+    "watch": "gulp watch --city springfield",
     "start": "gulp connect",
     "clean": "rm -rf dist/",
     "dev": "npm run clean && parallelshell 'npm run watch' 'npm run start'",

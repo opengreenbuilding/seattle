@@ -128,7 +128,7 @@
 
   label {
     background: #fff;
-    border-radius: 1em;
+    border-radius: $base-border-radius;
     color: $theme-color;
     cursor: pointer;
     @extend %disable-user-select;

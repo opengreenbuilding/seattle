@@ -1,7 +1,7 @@
 .search-wrapper {
   padding: $base-spacing/4 1em;
   border: 1px solid $base-border-color;
-  border-radius: 1em;
+  border-radius: $base-border-radius;
   margin: 0.5em 1em;
 
   .address-search:focus {

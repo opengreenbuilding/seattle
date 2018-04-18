@@ -221,14 +221,14 @@ header {
     background: $base-font-color;
     color: #fff;
     border: 0;
-    border-radius: 18px;
+    border-radius: $base-border-radius;
 
     &:after {
       border-color: #fff transparent transparent;
     }
 
     &.dropdown-active {
-      border-radius: 18px 18px 0 0;
+      border-radius: $base-border-radius $base-border-radius 0 0;
     }
 
     &.dropdown-active:after {
@@ -241,7 +241,7 @@ header {
     color: #fff;
     border: 0;
     white-space: nowrap;
-    border-radius: 0 0 18px 18px;
+    border-radius: 0 0 $base-border-radius $base-border-radius;
   }
 
   .selectize-dropdown .active {

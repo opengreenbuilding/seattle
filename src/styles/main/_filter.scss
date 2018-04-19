@@ -1,15 +1,44 @@
 #map-controls {
 
-  width: 30%;
+  width: $metric-left-width;
 
   .compare-mode & {
     width: 100%;
   }
 
   #map-controls--toggle {
-    position: absolute;
+    background-color: $theme-color;
+    border-bottom-right-radius: $base-border-radius;
+    border-top-right-radius: $base-border-radius;
+    color: $base-background-color;
+    cursor: pointer;
+    display: flex;
     left: 100%;
-    top: 0;
+    opacity: 0.5;
+    padding: 0.5em;
+    position: absolute;
+    top: 0.1em;
+    transition: width $base-duration $base-timing;
+    width: 3em;
+    div, svg {
+      display: inline-block;
+    }
+    div {
+      text-align: right;
+      padding-right: 0.25em;
+      flex-grow: 1;
+    }
+    svg {
+      fill: $base-background-color;
+    }
+    &:hover {
+      background-color: shade($theme-color, 20%);
+      opacity: 1;
+    }
+  }
+  &.closed #map-controls--toggle {
+    opacity: 1;
+    width: 6em;
   }
 
   #map-controls-bk {

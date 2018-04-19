@@ -133,6 +133,10 @@ header {
   width: 100%;
   left: 0;
   z-index: 4;
+  &.closed {
+    left: -$metric-left-width;
+  }
+  transition: left $base-duration $base-timing;
 
   .irs {
     height: 21px;
@@ -143,14 +147,10 @@ header {
 #map-wrapper{
   position: absolute;
   height: 100%;
+  left: 0;
   right: 0;
   overflow: hidden;
-  left: $nav-col-fixed-width;
   z-index: 1;
-
-  @include media($large-screen-up) {
-    left: $large-nav-col-fixed-width;
-  }
 }
 
 #map {

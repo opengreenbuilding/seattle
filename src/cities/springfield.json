@@ -13,8 +13,8 @@
     "backgroundTileSource": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
     "labelTileSource": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_only_labels/{z}/{x}/{y}.png",
     "center": [
-      40.61,
-      -120.33
+      46.133,
+      -120.091
     ],
     "zoom": 12,
     "categoryDefaults": [],
@@ -40,7 +40,7 @@
             },
             {
                 "name": "property_id",
-                "key": "id",
+                "key": "cartodb_id",
                 "hide": true
             }
         ],
@@ -78,7 +78,7 @@
                 "label": "least efficient"
             },
             "max": {
-                "value": 100,
+                "value": 200,
                 "label": "most efficient"
             }
         }
@@ -146,7 +146,7 @@
             "field_name": "energy_star_score",
             "display_type": "range",
             "range_slice_count": 18,
-            "filter_range": {"min": 1, "max" : 100},
+            "filter_range": {"min": 1, "max" : 200},
             "section": "Energy Performance Metrics",
             "color_range": ["#ab2328","#da863f","#ffd552","#599b67","#1f5dbe"],
             "formatter": "integer",
@@ -425,7 +425,7 @@
                 }
             ],
             "eui": {
-              "Distribution Center": {
+              "Automobile Dealership": {
                 "2015": [18.8,27.2,40.7],
                 "2016": [18.7,30.7,43.9]
               },

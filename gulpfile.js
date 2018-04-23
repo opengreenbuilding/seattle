@@ -35,13 +35,14 @@ gulp.task('templates', function() {
     .pipe(gulp.dest('dist/app/templates'));
 });
 
-gulp.task('theme', function () {
+// Styles
+
+gulp.task('prep-styles', function () {
   return gulp.src('src/styles/main.mustache')
-    .pipe(mustache({CITY: options.city}, {extension:'.scss'}))
+    .pipe(mustache({ CITY: options.city }, { extension:'.scss' }))
     .pipe(gulp.dest('src/styles/'));
 });
 
-// Styles
 gulp.task('styles', function() {
   return gulp.src('src/styles/**/*.scss')
     .pipe(sass({includePaths: require('node-neat').includePaths}).on('error', sass.logError))
@@ -51,6 +52,13 @@ gulp.task('styles', function() {
 });
 
 // Scripts
+
+gulp.task('prep-scripts', function () {
+  return gulp.src('src/app/router.mustache')
+    .pipe(mustache({ CITY: options.city }, { extension: '.js' }))
+    .pipe(gulp.dest('src/app/'));
+});
+
 gulp.task('scripts', function() {
   return gulp.src('src/app/**/*.js')
     .pipe(eslint('./.eslintrc'))
@@ -90,8 +98,10 @@ gulp.task('copy-lib', function() {
 
 // Default task
 gulp.task('default', ['clean'], function() {
-  //gulp.start('scripts');
-  gulp.start('fileinclude', 'theme', 'styles', 'scripts', 'images', 'templates', 'cities_config', 'copy-lib');
+    gulp.start('fileinclude',
+        'prep-styles', 'styles',
+        'prep-scripts', 'scripts',
+        'images', 'templates', 'cities_config', 'copy-lib');
 });
 
 gulp.task('connect', function() {

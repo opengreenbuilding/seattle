@@ -19,5 +19,6 @@ venv
 # csv files
 doee_scripts/*.csv
 
-
+# mustache templated files ... these get generated into /dist by gulp
 src/styles/main.scss
+src/app/router.js

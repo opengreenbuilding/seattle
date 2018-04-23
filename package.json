@@ -57,7 +57,7 @@
     "jasmine": "^2.3.2",
     "main-bower-files": "^2.9.0",
     "minimist": "^1.2.0",
-    "parallelshell": "^2.0.0",
+    "parallelshell": "^3.0.2",
     "selenium-webdriver": "^2.46.1",
     "serve": "^1.4.0"
   }

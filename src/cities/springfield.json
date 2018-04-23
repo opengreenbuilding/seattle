@@ -1,8 +1,8 @@
 {
-    "url_name": "seattle",
-    "name": "Seattle Energy Benchmarking",
+    "url_name": "springfield",
+    "name": "Springfield Energy Benchmarking",
     "logo_link_url": "http://cityenergyproject.github.io/seattle/",
-    "address_search_regional_context": "Seattle",
+    "address_search_regional_context": "Springfield",
     "header_banner_images": [
         {
             "src": "images/seattle-skyline@2x.jpg",
@@ -13,13 +13,13 @@
     "backgroundTileSource": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
     "labelTileSource": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_only_labels/{z}/{x}/{y}.png",
     "center": [
-      47.61,
-      -122.33
+      40.61,
+      -120.33
     ],
     "zoom": 12,
     "categoryDefaults": [],
-    "cartoDbUser": "cityenergy-seattle",
-    "table_name": "seattle_buildings_master",
+    "cartoDbUser": "testemailforgreg",
+    "table_name": "springfield",
     "property_id": "id",
     "property_name": "property_name",
     "building_type": "property_type",
@@ -216,11 +216,11 @@
     ],
     "years": {
         "2015": {
-            "table_name": "seattle_buildings_master",
+            "table_name": "springfield",
             "default_layer": "energy_star_score"
         },
         "2016": {
-            "table_name": "seattle_buildings_master",
+            "table_name": "springfield",
             "default_layer": "energy_star_score"
         }
     },
@@ -523,7 +523,7 @@
     "modals": {
         "faq": {
             "title": "Frequently asked questions (FAQ)",
-            "desc": "A quide to using this tool",
+            "desc": "A guide to using this tool",
             "tablename": "faq",
             "label": "FAQ",
             "reflinks": false

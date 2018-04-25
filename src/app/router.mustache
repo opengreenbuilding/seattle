@@ -12,6 +12,7 @@ define([
   'views/map/map_controls',
   'views/map/address_search_autocomplete',
   'views/map/year_control',
+  'views/map/year_dropdown',
   'views/layout/activity_indicator',
   'views/layout/building_counts',
   'views/layout/compare_bar',
@@ -23,7 +24,7 @@ define([
   'views/layout/footer'
 ], function($, deparam, _, Backbone, CityModel, ScorecardModel,
             CityBuildings, MapView, MapControlsView, AddressSearchView,
-            YearControlView, ActivityIndicator,
+            YearControlView, YearDropdownView, ActivityIndicator,
             BuildingCounts, CompareBar, ScorecardController,
             Button, MobileAlert, ModalModel, ModalController, FooterView) {
 
@@ -168,10 +169,10 @@ define([
     initialize: function(){
       const activityIndicator = new ActivityIndicator({state: this.state});
       const yearControlView = new YearControlView({state: this.state});
+      const yearDropdownView = new YearDropdownView({state: this.state});
       const mapControls = new MapControlsView();
       const mapView = new MapView({state: this.state});
       const addressSearchView = new AddressSearchView({mapView: mapView, state: this.state});
-
       const buildingCounts = new BuildingCounts({state: this.state});
       const compareBar = new CompareBar({state: this.state});
       const scorecardController = new ScorecardController({state: this.state, mapView: mapView});

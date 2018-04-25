@@ -4,7 +4,7 @@ define([
     'backbone',
     'text!templates/map/year_dropdown.html',
 ], function ($, _, Backbone, YearDropdownTemplate) {
-    var YearDropdown = Backbone.View.extend({
+    var YearDropdownView = Backbone.View.extend({
         $container: $('#year-select-container'),
         className: 'year-dropdown',
 
@@ -34,7 +34,17 @@ define([
 
             return this;
         },
+
+        events: {
+            'click': 'selectYear',
+        },
+
+        selectYear: function (event) {
+            event.preventDefault();
+            var year = event.target.innerHTML;
+            this.state.set({ year: year });
+        },
     });
 
-    return YearDropdown;
+    return YearDropdownView;
 });

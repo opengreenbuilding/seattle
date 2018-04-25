@@ -1,84 +1,87 @@
-// .year-control {
-//   border-bottom: 0.1em solid transparent;
-//   line-height: 1;
+.year-control {
+  border-bottom: 0.1em solid transparent;
+  line-height: 1;
 
-//   li {
-//     position: relative;
-//     display: inline-block;
-//   }
+  li {
+    position: relative;
+    display: inline-block;
+  }
 
-//   input {
-//     display: none;
-//   }
+  input {
+    display: none;
+  }
 
-//   label {
-//     line-height: 1;
+  label {
+    line-height: 1;
 
-//     &::after {
-//       height: 0.5em;
-//       width: 0.5em;
-//       border-radius: 50%;
-//       display: block;
-//       content: " ";
-//       position: absolute;
-//       top: 100%;
-//       left: 50%;
-//       margin-top: -0.2em;
-//       margin-left: -0.25em;
-//     }
-//   }
+    &::after {
+      height: 0.5em;
+      width: 0.5em;
+      border-radius: 50%;
+      display: block;
+      content: " ";
+      position: absolute;
+      top: 100%;
+      left: 50%;
+      margin-top: -0.2em;
+      margin-left: -0.25em;
+    }
+  }
 
-//   li + li {
-//     margin-left: 0.75em;
-//   }
-// }
+  li + li {
+    margin-left: 0.75em;
+  }
+}
 
-// .year-control {
-//   font-weight: 500;
-//   border-bottom-color: rgba(darken($theme-color, 15), 0.7);
-//   text-align: center;
+.year-control {
+  font-weight: 500;
+  border-bottom-color: rgba(darken($theme-color, 15), 0.7);
+  text-align: center;
 
-//   label {
-//     @extend %disable-user-select;
-//   }
+  label {
+    @extend %disable-user-select;
+  }
 
-//   input + label {
-//     cursor: pointer;
-//     color: darken($theme-color, 10);
-//     opacity: 0.85;
-//     margin-bottom: 0.4em;
+  input + label {
+    cursor: pointer;
+    color: darken($theme-color, 10);
+    opacity: 0.85;
+    margin-bottom: 0.4em;
 
-//     &::after {
-//       opacity: 0.6;
-//       background-color: darken($theme-color, 15);
-//     }
-//   }
+    &::after {
+      opacity: 0.6;
+      background-color: darken($theme-color, 15);
+    }
+  }
 
-//   input:checked + label {
-//     color: white;
-//     opacity: 1;
-//     cursor: default;
+  input:checked + label {
+    color: white;
+    opacity: 1;
+    cursor: default;
 
-//     &::after {
-//       opacity: 1;
-//       background-color: white;
-//     }
-//   }
-// }
+    &::after {
+      opacity: 1;
+      background-color: white;
+    }
+  }
+}
 
-.dropdown-container {
+.year-dropdown {
   display: none;
 }
 
 @media only screen and (max-width: 850px) {
 
+  .year-control {
+    display: none;
+  }
+  
   #year-select-container {
-    cursor: pointer;
     width: 100px;
     height: 100%;
   }
 
-  .dropdown-container {
+  .year-dropdown {
     display: block;
   }
 
@@ -95,7 +98,7 @@
     left: 10%;
     font-size: 25px;
   }
-  .year-control {
+  .year-dropdown-control {
     display: none;
     position: absolute;
     border: 1px solid black;
@@ -107,12 +110,18 @@
     z-index: 1;
     top: 100%;
 
-    input {
+    a {
       cursor: pointer;
+      font-family: inherit;
+      font-weight: bold;
+      color: #0047ba;
+    }
+    a:hover {
+      color: #00B0FF;
     }
   }
 
-  #year-select-container:hover .year-control {
+  #year-select-container:hover .year-dropdown-control {
       display: block;
   }
 }

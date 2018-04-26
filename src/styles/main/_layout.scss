@@ -96,11 +96,7 @@ header {
   @include media($large-screen-up) {
     left: $large-nav-col-fixed-width;
   }
-
-  .map-category-control + .map-category-control {
-    margin-left: 1em;
-  }
-
+  
   .map-category-control {
     display: none;
 

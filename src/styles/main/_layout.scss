@@ -98,7 +98,7 @@ header {
   }
   
   .map-category-control {
-    display: none;
+    display: block;
 
     @include media($small-screen-up) {
       &:nth-child(1), &:nth-child(2){
@@ -206,7 +206,7 @@ header {
   }
 }
 
-#building-proptype-selector {
+#-selector {
   width: 70%;
   margin-top: 0.5rem;
 
@@ -245,6 +245,6 @@ header {
   }
 
   .selectize-dropdown, .selectize-input, .selectize-input input {
-    font-size: 0.9em;
+    font-size: 0.75em;
   }
 }

@@ -1,12 +1,32 @@
-@media only screen and (max-width: 850px) {
+@include media ($large-screen) {
+    .dropwdown-wrapper {
+        display: block;
+    }
+    .toolbar-control-container {
+        display: none;
+    }
+}
+
+@media only screen and (max-width: $large-screen) {
 
     #toolbar {
         height: 3em;
         position: relative;
         z-index: 2;
         display: flex;
-        background-color: #0047ba;
-        color: white;
+        background-color: $blue;
+        color: $action-color;
+    }
+
+    .toolbar-control-container {
+        font-size: 2em;
+        position: absolute;
+        top: 4%;
+        left: 2%;
+
+        i {
+            cursor: pointer;
+        }
     }
 
     .dropdown-wrapper {
@@ -16,31 +36,29 @@
         height: 160px;
         width: 260px;
         flex-direction: column;
-        background-color: #0047ba;
+        background-color: $blue;
         z-index: 1;
     }
 
     #search {
         margin-bottom: 0px;
-        margin-left: -3px;
+        margin-left: 0px;
         position: relative;
-        height: 2.5em;
-        width: 19em;
+        width: 100%;
 
         .search-wrapper {
             padding: 0.4em 1em;
-            border: 1px solid white;
+            border: 1px solid $dark-gray;
+            background-color: $action-color;
             border-radius: 1em;
             margin: 10px 8px;
         }
 
         .address-search {
+            color: $dark-gray;
+            background-color: $action-color;
             width: 15.75em;
         }
-    }
-
-    .toolbar:hover .dropdown-wrapper {
-        display: block;
     }
 
     #map-category-controls {
@@ -50,7 +68,7 @@
         flex-direction: column;
         flex: 1;
         align-items: center;
-        background-color: #0047ba;
+        background-color: $blue;
         position: relative;
         top: 0;
         height: 0;
@@ -60,8 +78,8 @@
         .map-category-control {
             width: 100%;
             margin: 0;
-            padding: 0 5px 5px 5px;
-            background-color: #0047ba;
+            padding: 0 8px 5px 8px;
+            background-color: $blue;
         }
     }
 }

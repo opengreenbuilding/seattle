@@ -5,11 +5,8 @@
         <% _.each(years, function(year){ %>
             <li>
                 <a  id="year-<%= year %>" id="year-<%= year %>" value="<%= year %>" name="year" <%=( year== current_year) ? 'checked="checked"' : ''%>><%= year %></a>
-                <!-- <label for="year-<%= year %>">
-                    <%= year %>
-                </label> -->
             </li>
-            <% }) %>
+        <% }) %>
     </ol>
 </div>
 

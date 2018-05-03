@@ -1,11 +1,13 @@
 .toolbar {
-  background-color: $orange;
+  background-color: $theme-color;
   color: $inverse-font-color;
 
-  .tbar-right {
-    position: absolute;
-    right: 0;
-    top: 0;
-    bottom: 0;
-  }
+}
+
+.tbar-right {
+  position: absolute;
+  top: 0;
+  right: 0;
+  height: 3em;
+  z-index: 2;
 }

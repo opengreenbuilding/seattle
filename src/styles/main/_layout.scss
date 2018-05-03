@@ -96,13 +96,9 @@ header {
   @include media($large-screen-up) {
     left: $large-nav-col-fixed-width;
   }
-
-  .map-category-control + .map-category-control {
-    margin-left: 1em;
-  }
-
+  
   .map-category-control {
-    display: none;
+    display: block;
 
     @include media($small-screen-up) {
       &:nth-child(1), &:nth-child(2){
@@ -131,9 +127,12 @@ header {
   position: absolute;
   height: 100%;
   width: 100%;
-  overflow: hidden;
   left: 0;
-  z-index: 10;
+  z-index: 4;
+  &.closed {
+    left: -$metric-left-width;
+  }
+  transition: left $base-duration $base-timing;
 
   .irs {
     height: 21px;
@@ -144,14 +143,10 @@ header {
 #map-wrapper{
   position: absolute;
   height: 100%;
+  left: 0;
   right: 0;
   overflow: hidden;
-  left: $nav-col-fixed-width;
   z-index: 1;
-
-  @include media($large-screen-up) {
-    left: $large-nav-col-fixed-width;
-  }
 }
 
 #map {
@@ -213,7 +208,7 @@ header {
 
 #building-proptype-selector {
   width: 70%;
-  margin-top: 0.5rem;
+  margin-top: 3px;
 
   .selectize-control.single {}
 
@@ -221,14 +216,14 @@ header {
     background: $base-font-color;
     color: #fff;
     border: 0;
-    border-radius: 18px;
+    border-radius: $base-border-radius;
 
     &:after {
       border-color: #fff transparent transparent;
     }
 
     &.dropdown-active {
-      border-radius: 18px 18px 0 0;
+      border-radius: $base-border-radius $base-border-radius 0 0;
     }
 
     &.dropdown-active:after {
@@ -241,7 +236,7 @@ header {
     color: #fff;
     border: 0;
     white-space: nowrap;
-    border-radius: 0 0 18px 18px;
+    border-radius: 0 0 $base-border-radius $base-border-radius;
   }
 
   .selectize-dropdown .active {
@@ -250,6 +245,6 @@ header {
   }
 
   .selectize-dropdown, .selectize-input, .selectize-input input {
-    font-size: 0.9em;
+    font-size: 14px;
   }
 }

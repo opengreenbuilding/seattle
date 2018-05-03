@@ -1,0 +1,12 @@
+<i class="far fa-calendar-alt"></i>
+<span class="current-year"><%= current_year %></span>
+<div class="year-dropdown-control">
+    <ol>
+        <% _.each(years, function(year){ %>
+            <li>
+                <a  id="year-<%= year %>" id="year-<%= year %>" value="<%= year %>" name="year" <%=( year== current_year) ? 'checked="checked"' : ''%>><%= year %></a>
+            </li>
+        <% }) %>
+    </ol>
+</div>
+

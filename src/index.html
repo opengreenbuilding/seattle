@@ -14,7 +14,8 @@
     <link rel="stylesheet" type="text/css" href="https://cartodb-libs.global.ssl.fastly.net/cartodb.js/v3/3.15/themes/css/cartodb.css" />
     <link rel="stylesheet" type="text/css" href="https://cdnjs.cloudflare.com/ajax/libs/selectize.js/0.12.4/css/selectize.default.min.css" />
     <link rel="stylesheet" type="text/css" href="styles/main.min.css">
-
+    <link href="images/webfonts/fontawesome-all.css" rel="stylesheet" />
+    
     <!-- toLocaleString support -->
     <script src="https://cdn.polyfill.io/v2/polyfill.js?features=Intl.~locale.en-US|always&gated=0"></script>
   </head>
@@ -23,16 +24,18 @@
     <div id="modals"></div>
     <header id="title"></header>
     <div id="toolbar" class="toolbar">
-        <div id='search'></div>
-        <div id="map-category-controls"></div>
-        <div class="tbar-right">
-          <div id="city-scorcard-toggle"></div>
-          <div id='year-select-container'></div>
+        <div class="dropdown-wrapper">
+          <div id='search'></div>
+          <div id="map-category-controls"></div>
         </div>
     </div>
-
+    <div class="tbar-right">
+      <div id="city-scorecard-toggle"></div>
+      <div id='year-select-container'></div>
+    </div>
     <div class="main-container">
       <div id="map-controls">
+        <div id="map-controls--toggle"></div>
         <div id="map-controls-bk"></div>
         <div id="map-controls-header">
           <div>

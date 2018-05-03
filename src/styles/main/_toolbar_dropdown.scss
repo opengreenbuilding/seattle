@@ -8,20 +8,19 @@
 }
 
 @media only screen and (max-width: $large-screen) {
-
     #toolbar {
         height: 3em;
         position: relative;
         z-index: 2;
         display: flex;
-        background-color: $blue;
+        background-color: $theme-color;
         color: $action-color;
     }
 
     .toolbar-control-container {
         font-size: 2em;
         position: absolute;
-        top: 4%;
+        top: 3%;
         left: 2%;
 
         i {
@@ -36,7 +35,7 @@
         height: 160px;
         width: 260px;
         flex-direction: column;
-        background-color: $blue;
+        background-color: $theme-color;
         z-index: 1;
     }
 
@@ -68,7 +67,7 @@
         flex-direction: column;
         flex: 1;
         align-items: center;
-        background-color: $blue;
+        background-color: $theme-color;
         position: relative;
         top: 0;
         height: 0;
@@ -79,8 +78,14 @@
             width: 100%;
             margin: 0;
             padding: 0 8px 5px 8px;
-            background-color: $blue;
+            background-color: $theme-color;
         }
+    }
+}
+
+@media only screen and (max-width: $medium-screen) {
+    .toolbar-control-container {
+        top: 15%;
     }
 }
 

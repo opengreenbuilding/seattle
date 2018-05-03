@@ -11,7 +11,7 @@ define([
   'views/map/map',
   'views/map/map_controls',
   'views/map/address_search_autocomplete',
-  'views/map/category-dropdown',
+  'views/map/category_dropdown',
   'views/map/year_control_desktop',
   'views/map/year_control_mobile',
   'views/layout/activity_indicator',
@@ -172,7 +172,7 @@ define([
       const categoryDropdownView = new CategoryDropdownView({isOpen: false});
       const yearControlDesktopView = new YearControlDesktopView({state: this.state});
       const yearControlMobileView = new YearControlMobileView({state: this.state});
-      const mapControls = new MapControlsView();
+      const mapControls = new MapControlsView({state: this.state, isOpen: true});
       const mapView = new MapView({state: this.state});
       const addressSearchView = new AddressSearchView({mapView: mapView, state: this.state});
       const buildingCounts = new BuildingCounts({state: this.state});

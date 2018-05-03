@@ -12,10 +12,22 @@ define(["jquery", "backbone"], function($, Backbone) {
   var MapControlsView = Backbone.View.extend({
     el: "#map-controls",
     initialize: function(options) {
-      options = options || {};
-      this.isOpen = options.isOpen || true;
+      var self = this;
+      this.state = options.state;
+      this.isOpen = options.isOpen;
+      this.listenTo(this.state, 'change:building_compare_active', this.render);
+
+      $(window).on('resize', function () {
+        var isCompareActive = options.state.get('building_compare_active')
+        if (window.innerWidth < 900 && isCompareActive) {
+          $('.main-container').removeClass('compare-mode');
+          options.state.set({'building_compare_active': false})
+        }
+      });
+
       this.render();
     },
+
     events: {
       "click #map-controls--toggle": function(e) {
         e.stopPropagation();
@@ -23,8 +35,21 @@ define(["jquery", "backbone"], function($, Backbone) {
         this.render();
       }
     },
+
     render: function() {
+      var isCompareModeActive = this.state.get("building_compare_active") || false;
+      var $mapControlsCounts = $('#map-controls-counts')
       var $toggle = this.$("#map-controls--toggle");
+
+      if (isCompareModeActive && !this.isOpen) {
+        this.isOpen = true;
+      } 
+      if (isCompareModeActive) {
+        $mapControlsCounts.css({ "background": "none", "padding-top": "20px" })
+      }
+      if (!isCompareModeActive) {
+        $mapControlsCounts.css({ "background": "#f2f2f2", "padding-top": "0" })
+      }
       if (this.isOpen) {
         $toggle.html(open);
         this.$el.removeClass("closed");

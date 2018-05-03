@@ -1,5 +1,8 @@
-define(['jquery', 'underscore', 'backbone', 'text!templates/map_controls/category-dropdown.html',], 
-  function($, _, Backbone, MapCategoryDropdownTemplate){
+define([
+  'jquery',
+  'underscore',
+  'backbone', 
+], function($, _, Backbone){
     var CategoryDropdownView = Backbone.View.extend({
       $container: $('#toolbar'),
       className: 'toolbar-control-container',  
@@ -11,10 +14,7 @@ define(['jquery', 'underscore', 'backbone', 'text!templates/map_controls/categor
 
       render: function() {
         this.$el.appendTo(this.$container);
-        const template = _.template(MapCategoryDropdownTemplate);
-        this.$el.html(template({
-          content: "fas fa-bars"
-        }));
+        this.$el.html("<div class='toolbar-control-button'><i class='far fa-align-justify'></i></div>");
 
         return this;
       },

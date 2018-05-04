@@ -1,4 +1,5 @@
 define(["jquery", "backbone"], function($, Backbone) {
+  var cssLargeScreen = 900;
   var closed = `<div>Filters</div>
     <svg fill='#000000' height='24' viewBox='0 0 24 24' width='24' xmlns='http://www.w3.org/2000/svg'>
       <path d='M8.59 16.34l4.58-4.59-4.58-4.59L10 5.75l6 6-6 6z'/> <path d='M0-.25h24v24H0z' fill='none'/>
@@ -19,7 +20,7 @@ define(["jquery", "backbone"], function($, Backbone) {
 
       $(window).on('resize', function () {
         var isCompareActive = options.state.get('building_compare_active')
-        if (window.innerWidth < 900 && isCompareActive) {
+        if (window.innerWidth < cssLargeScreen && isCompareActive) {
           $('.main-container').removeClass('compare-mode');
           options.state.set({'building_compare_active': false})
         }
@@ -43,20 +44,21 @@ define(["jquery", "backbone"], function($, Backbone) {
 
       if (isCompareModeActive && !this.isOpen) {
         this.isOpen = true;
-      } 
+      };
+
       if (isCompareModeActive) {
         $mapControlsCounts.css({ "background": "none", "padding-top": "20px" })
-      }
-      if (!isCompareModeActive) {
+      } else {
         $mapControlsCounts.css({ "background": "#f2f2f2", "padding-top": "0" })
-      }
+      };
+
       if (this.isOpen) {
         $toggle.html(open);
         this.$el.removeClass("closed");
       } else {
         $toggle.html(closed);
         this.$el.addClass("closed");
-      }
+      };
       return this;
     }
   });

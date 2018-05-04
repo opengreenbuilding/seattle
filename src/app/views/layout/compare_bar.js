@@ -28,7 +28,7 @@ define([
     events: {
       'click .toggle': 'onBarClickHandler',
       'click .close': 'onCloseHandler',
-      'click .name': 'onNameClickHandler',
+      'click .name': 'onNameClickHandler'
     },
 
     onCategoryChange: function() {

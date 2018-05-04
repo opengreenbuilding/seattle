@@ -44,13 +44,13 @@ define(["jquery", "backbone"], function($, Backbone) {
 
       if (isCompareModeActive && !this.isOpen) {
         this.isOpen = true;
-      };
+      }
 
       if (isCompareModeActive) {
         $mapControlsCounts.css({ "background": "none", "padding-top": "20px" })
       } else {
         $mapControlsCounts.css({ "background": "#f2f2f2", "padding-top": "0" })
-      };
+      }
 
       if (this.isOpen) {
         $toggle.html(open);
@@ -58,7 +58,7 @@ define(["jquery", "backbone"], function($, Backbone) {
       } else {
         $toggle.html(closed);
         this.$el.addClass("closed");
-      };
+      }
       return this;
     }
   });

@@ -65,3 +65,65 @@
     }
   }
 }
+
+.year-dropdown {
+  display: none;
+}
+
+@media only screen and (max-width: $medium-screen) {
+
+  .year-control {
+    display: none;
+  }
+  
+  #year-select-container {
+    width: 100px;
+    height: 100%;
+    margin: 0 5px;
+    top: 44%;
+  }
+
+  .year-dropdown {
+    display: block;
+    color: white;
+  }
+
+  .current-year {
+    position: absolute;
+    font-size: 20px;
+    top: 17%;
+    left: 40%;
+  }
+
+  #calendar-svg {
+    position: absolute;
+    top: 20%;
+    left: 10%;
+    font-size: 25px;
+  }
+
+  .year-dropdown-control {
+    display: none;
+    position: absolute;
+    border-top: none;
+    background-color: $blue;
+    width: 100px;
+    padding: 11px 16px;
+    z-index: 1;
+    top: 100%;
+
+    a {
+      cursor: pointer;
+      font-family: inherit;
+      font-weight: bold;
+      color: white;
+    }
+    a:hover {
+      color: $action-color;
+    }
+  }
+
+  #year-select-container:hover .year-dropdown-control {
+      display: block;
+  }
+}

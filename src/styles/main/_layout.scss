@@ -96,13 +96,9 @@ header {
   @include media($large-screen-up) {
     left: $large-nav-col-fixed-width;
   }
-
-  .map-category-control + .map-category-control {
-    margin-left: 1em;
-  }
-
+  
   .map-category-control {
-    display: none;
+    display: block;
 
     @include media($small-screen-up) {
       &:nth-child(1), &:nth-child(2){
@@ -212,7 +208,7 @@ header {
 
 #building-proptype-selector {
   width: 70%;
-  margin-top: 0.5rem;
+  margin-top: 3px;
 
   .selectize-control.single {}
 
@@ -249,6 +245,6 @@ header {
   }
 
   .selectize-dropdown, .selectize-input, .selectize-input input {
-    font-size: 0.9em;
+    font-size: 14px;
   }
 }

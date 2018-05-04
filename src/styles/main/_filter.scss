@@ -64,7 +64,7 @@
     box-shadow: inset 0 -1px $base-font-color;
 
     > div {
-      padding: 0.75em 1em 0.75em 2em;
+      padding: 0.75em 1em 0.75em 1em;
     }
 
     h4 {
@@ -104,6 +104,7 @@
    }
 
    #map-controls-content--inner {
+    background-color: $light-gray;
     overflow-y: scroll;
     height: 100%;
    }
@@ -506,6 +507,31 @@
 
     &.highlight {
       fill-opacity: 1;
+    }
+  }
+}
+
+@media only screen and (max-width: $large-screen) {
+  #map-controls {
+    width: 50%;
+    &.closed {
+      left: -50%;
+    }
+  }
+}
+@media only screen and (max-width: $medium-screen) {
+  #map-controls {
+    width: 75%;
+    &.closed {
+      left: -75%;
+    }
+  }
+}
+@media only screen and (max-width: $small-screen) {
+  #map-controls {
+    width: 90%;
+    &.closed {
+      left: -90%;
     }
   }
 }

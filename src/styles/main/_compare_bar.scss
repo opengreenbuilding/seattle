@@ -8,6 +8,7 @@
   z-index: 1000;
   cursor: pointer;
   font-size: 1em;
+  transition: top $base-duration $base-timing;
 
   // triangle thingy
   &:after {
@@ -123,5 +124,15 @@
     top: 100%;
     border-width: 10px 10px 0 10px;
     border-color: $theme-color transparent transparent transparent;
+  }
+}
+
+@media only screen and (max-width: $large-screen) {
+  #map-controls-bar {
+    display: none;
+  }
+  
+  #map-controls-counts {
+    width: 100%;
   }
 }

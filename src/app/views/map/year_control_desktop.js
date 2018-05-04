@@ -2,9 +2,9 @@ define([
   'jquery',
   'underscore',
   'backbone',
-  'text!templates/map/year_control.html',
-], function($, _, Backbone, YearControlTemplate) {
-  var YearControlView = Backbone.View.extend({
+  'text!templates/map/year_control_desktop.html',
+], function($, _, Backbone, YearControlDesktopTemplate) {
+  var YearControlDesktopView = Backbone.View.extend({
     $container: $('#year-select-container'),
     className: 'year-control',
 
@@ -26,7 +26,7 @@ define([
 
       this.$el.appendTo(this.$container);
 
-      var template = _.template(YearControlTemplate);
+      var template = _.template(YearControlDesktopTemplate);
       this.$el.html(template({
         years: _.keys(city.get('years')),
         current_year: this.state.get('year'),
@@ -45,5 +45,5 @@ define([
     },
   });
 
-  return YearControlView;
+  return YearControlDesktopView;
 });

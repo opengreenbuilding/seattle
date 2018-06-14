@@ -13,8 +13,8 @@
     "backgroundTileSource": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_all/{z}/{x}/{y}.png",
     "labelTileSource": "https://cartodb-basemaps-{s}.global.ssl.fastly.net/light_only_labels/{z}/{x}/{y}.png",
     "center": [
-      46.133,
-      -120.091
+      49.1664,
+      -123.137
     ],
     "zoom": 12,
     "categoryDefaults": [],
@@ -57,7 +57,7 @@
     "popup_fields": [
         {"field": "property_name", "label": ""},
         {"field": "reported_address", "template": "{reported_address}"},
-        {"field": "zip", "template": "Seattle, WA {zip}", "skipFormatter": true},
+        {"field": "property_postal_code", "template": "Springfield, BC {property_postal_code}", "skipFormatter": true},
         {"field": "property_type", "template": "<strong>{property_type}</strong>"},
         {"field": "reported_gross_floor_area", "template": "<strong>{reported_gross_floor_area}</strong> ft²"},
         {"field": "id", "label": "Building ID "},

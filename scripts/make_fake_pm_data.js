@@ -90,7 +90,7 @@ function normalizeBuildingData(dataset, cb) {
             latitude: building.LAT_LONG[0],
             longitude: building.LAT_LONG[1],
             city: "Springfield",
-            year: 2016,
+            year: 2015,
             reported_address: building.PROPERTY_ADDRESS,
             property_type: building.PRIMARY_USE,
             property_name: building.NOTES,

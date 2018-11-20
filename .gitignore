@@ -1,4 +1,3 @@
-
 /tmp
 
 # dependencies
@@ -6,6 +5,7 @@
 /bower_components
 
 # misc
+.DS_Store
 /.sass-cache
 npm-debug.log
 dist/
@@ -13,7 +13,7 @@ dist/
 .local_only
 .publish
 
-# virtual enviorn
+# virtual environ
 venv
 
 # csv files

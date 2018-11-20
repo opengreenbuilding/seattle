@@ -130,7 +130,7 @@ define([
     getLinksTable: function() {
       const city = this.state.get('city');
       const table = city && city.get && city.get('scorecard');
-      return (table && table.links_table) || 'links'
+      return (table && table.links_table) || 'links';
     },
 
     renderLinks: function(building, building_type, isBuildingRenderer) {

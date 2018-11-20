@@ -19,7 +19,6 @@ define([
             BuildingColorBucketCalculator, HistogramView, Formatters, ThresholdUtils,
             FilterSectionHeader, FilterTemplate, FilterQuartileTemplate, FilterContainer,
             FilterBuildingDetailsTemplate, FilterPropertyTypeTemplate){
-
   var MapControlView = Backbone.View.extend({
     className: "map-control",
     $container: $('#map-controls-content--inner'),
@@ -86,18 +85,17 @@ define([
       this.$el.find('.building-details').html(tableTemplate({table: tableData.data}));
 
       if (this.histogram) {
-        this.histogram.updateHighlight(tableData.selected_value)
+        this.histogram.updateHighlight(tableData.selected_value);
       }
-
     },
 
     getCompareBuildings: function() {
       var buildings = this.allBuildings;
-      var o = Array.apply(null, Array(5)).map(function () {});
+      var o = Array(...Array(5)).map(function() {});
 
       var selected_buildings = this.state.get('selected_buildings') || [];
 
-      selected_buildings.forEach(function(building,i){
+      selected_buildings.forEach(function(building, i){
         var model = buildings.get(building.id);
         if (!model) return;
 
@@ -152,7 +150,7 @@ define([
           value,
           unit,
           cell_klass: klasses.join(' ')
-        }
+        };
       });
 
       return o;
@@ -189,7 +187,6 @@ define([
         propertyType,
         value
       ];
-
     },
 
     memorize: function() {
@@ -339,7 +336,7 @@ define([
           width: this.histogram.xScale.rangeBand() * svgScaleFactor,
           labels: this.threshold_labels,
           positions: this.histogram.xScale.range().map(d => d * svgScaleFactor)
-        }
+        };
 
         this.$el.find('.quartiles').html(quartileTemplate(qlabels));
       }
@@ -406,7 +403,7 @@ define([
             }
           });
 
-        switch(positionInCategory){
+        switch (positionInCategory){
           case 0:
             section.find('.category-control-container').prepend(elm);
             break;
@@ -439,10 +436,10 @@ define([
         // want to use the rangeSlider extents to filter the data on the map.
         if (!thresholds) {
           if (values.from !== values.min) newFilter.min = values.from;
-          if (values.to   !== values.max) newFilter.max = values.to;
+          if (values.to !== values.max) newFilter.max = values.to;
         } else {
           if (values.from !== values.min && values.from !== 0) newFilter.min = thresholds[values.from - 1];
-          if (values.to   !== values.max && values.to !== 3) newFilter.max = thresholds[values.to];
+          if (values.to !== values.max && values.to !== 3) newFilter.max = thresholds[values.to];
         }
 
         filters.push(newFilter);
@@ -454,7 +451,6 @@ define([
     },
 
     onPrettifyHandler: function(min, max, histogram) {
-
       if (this.isThreshold) {
         const labels = this.layer.slider_labels;
         return function(num) {
@@ -463,7 +459,7 @@ define([
       }
 
       return function(num) {
-        switch(num) {
+        switch (num) {
           case min: return num.toLocaleString();
           case max: return num.toLocaleString() + "+";
           default: return num.toLocaleString();
@@ -472,7 +468,7 @@ define([
     },
 
     events: {
-      'click' : 'showLayer',
+      'click': 'showLayer',
       'click .more-info': 'toggleMoreInfo',
       'click .compare-closer': 'closeCompare'
     },
@@ -486,8 +482,8 @@ define([
     showLayer: function(){
       var layerID = this.layer.id ? this.layer.id : this.layer.field_name;
 
-      ///layer_thresholds: this.threshold_values
-      this.state.set({layer: layerID ,sort: this.layer.field_name, order: 'desc'});
+      // /layer_thresholds: this.threshold_values
+      this.state.set({layer: layerID, sort: this.layer.field_name, order: 'desc'});
     },
 
     toggleMoreInfo: function(){
@@ -512,5 +508,4 @@ define([
   });
 
   return MapControlView;
-
 });

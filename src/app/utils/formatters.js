@@ -12,10 +12,10 @@ define(['d3'], function(d3) {
     quartile: idx => {
       return QUARTILES[idx] || '';
     },
-    threshold: (labels) => {
-      return (idx) => {
+    threshold: labels => {
+      return idx => {
         return labels[idx] || '';
-      }
+      };
     }
   };
 

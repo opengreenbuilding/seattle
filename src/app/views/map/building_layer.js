@@ -7,7 +7,6 @@ define([
   'text!templates/map/building_info.html'
 ], function($, _, Backbone, CityBuildings,
         BuildingColorBucketCalculator, BuildingInfoTemplate){
-
   const baseCartoCSS = {
     dots: [
     '{marker-fill: #CCC;' +
@@ -141,7 +140,7 @@ define([
     if (!this.controls || !this.controls._wrapped) return this.defaultColor;
 
     // TODO: fix hacky way to deal w/ quartiles
-    var filter = this.controls._wrapped.find((item) => {
+    var filter = this.controls._wrapped.find(item => {
       if (item.viewType !== 'filter') return false;
 
       if (item.layer.id === 'site_eui_quartiles') {

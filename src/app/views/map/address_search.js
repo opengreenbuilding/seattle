@@ -5,7 +5,6 @@ define([
   'toastr',
   'text!templates/map/address_search.html'
 ], function($, _, Backbone, toastr, AddressSearchTemplate){
-
   var AddressSearchView = Backbone.View.extend({
     $container: $('#search'),
 
@@ -32,7 +31,7 @@ define([
     },
 
     events: {
-      'search' : 'search',
+      'search': 'search',
     },
 
     search: function(){
@@ -47,9 +46,9 @@ define([
       $.ajax({
         url: url,
         data: {
-          api_key: 'search-oqsffOQ',
-          text: search + " " + this.state.get('city').get('address_search_regional_context'),
-          size: 10,
+          "api_key": 'search-oqsffOQ',
+          "text": search + " " + this.state.get('city').get('address_search_regional_context'),
+          "size": 10,
           'focus.point.lat': center[0],
           'focus.point.lon': center[1],
           'boundary.rect.min_lat': 38.79163,
@@ -78,8 +77,7 @@ define([
         var coordinates = hits[0].geometry.coordinates.reverse();
         this.placeMarker(coordinates);
         this.mapView.leafletMap.setView(coordinates);
-      }
-      else{
+      } else {
         toastr.options = {
           'closeButton': true,
           'debug': false,
@@ -129,5 +127,4 @@ define([
   });
 
   return AddressSearchView;
-
 });

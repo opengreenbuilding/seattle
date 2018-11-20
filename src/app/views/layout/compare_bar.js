@@ -106,7 +106,7 @@ define([
       this._lastPropertyType = propertyType;
 
       const o = {
-        compares: Array.apply(null, Array(5)).map(function () {})
+        compares: Array(...Array(5)).map(function() {})
       };
 
       const selected_buildings = this.state.get('selected_buildings') || [];
@@ -130,8 +130,7 @@ define([
       });
 
 
-
-      return this.template(o)
+      return this.template(o);
     },
 
     render: function(){

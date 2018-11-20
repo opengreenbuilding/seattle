@@ -23,7 +23,7 @@ define([
 
       // reset all
       // TODO: fix slowness when resetting
-      $('.reset-all-filters').on('click', (e) => {
+      $('.reset-all-filters').on('click', e => {
         if (e.preventDefault) e.preventDefault();
 
         var city = this.state.get('city').toJSON();
@@ -37,7 +37,7 @@ define([
           'filters': [],
           'metrics': [default_layer],
           'layer': default_layer,
-          sort: default_layer,
+          "sort": default_layer,
           'reset_all': true
         });
 
@@ -76,7 +76,7 @@ define([
 
       var me = this;
       const selector = $('#building-proptype-selector > select').selectize({
-        onChange: (val) => {
+        onChange: val => {
           if (val === '*') val = null;
 
           const currentCategories = this.state.get('categories');
@@ -107,7 +107,6 @@ define([
     },
 
     getThreshold: function(propType) {
-
       // TODO: This will fail loudly
       const availableThresholds = this.state.get('city').get('scorecard').thresholds.eui;
       const year = this.state.get('year');
@@ -126,7 +125,6 @@ define([
       var lat = this.state.get('lat');
       var lng = this.state.get('lng');
       var zoom = this.state.get('zoom');
-
 
 
       if (!this.leafletMap){

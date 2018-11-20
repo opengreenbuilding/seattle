@@ -92,7 +92,6 @@ define([
 
         return acc;
       }, init);
-
     }
 
 

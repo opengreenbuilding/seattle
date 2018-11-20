@@ -22,7 +22,7 @@ define([
       var orderedValues = Object.keys(counts)
         .sort(function(a, b) {
           if (this.layer.sort_by_key){
-            if(a===b) return 0;
+            if (a===b) return 0;
             return (a<b) ? -1 : 1;
           }
           // default is to sort by max count value asc
@@ -30,7 +30,7 @@ define([
         }.bind(this));
 
       this.values = orderedValues.slice(0, this.layer.hide_other_category ? orderedValues.length++ : 9 );
-      if(!this.layer.hide_other_category) this.values.concat([OTHER_LABEL]);
+      if (!this.layer.hide_other_category) this.values.concat([OTHER_LABEL]);
       this.otherValues = this.layer.hide_other_category ? [] : orderedValues.slice(9);
     },
 
@@ -44,14 +44,14 @@ define([
           counts = this.allBuildings.countBy(fieldName),
           fieldKeys = _.keys(counts),
           onloadDisplayValues = !this.layer.onload_display_values ?
-                fieldKeys.reduce(function(accum,current){
+                fieldKeys.reduce(function(accum, current){
                   accum[current] = true;
                   return accum;
-                },{}) :
-                this.layer.onload_display_values.split(',').reduce(function(accum,current){
+                }, {}) :
+                this.layer.onload_display_values.split(',').reduce(function(accum, current){
                   accum[current] = true;
                   return accum;
-                },{}),
+                }, {}),
           defaultCategoryState = {field: fieldName, values: [fieldKeys], other: true},
           categoryState = _.findWhere(this.state.get('categories'), {field: fieldName}) || defaultCategoryState,
           template = _.template(MapCategoryControlTemplate);
@@ -84,7 +84,7 @@ define([
     },
 
     events: {
-      'change .categories input' : 'toggleCategory',
+      'change .categories input': 'toggleCategory',
       'click .categories .showAll': 'showAll',
       'click .categories .hideAll': 'hideAll'
     },
@@ -92,8 +92,8 @@ define([
     toggleCategory: function(){
       var categories = this.state.get('categories'),
           fieldName = this.layer.field_name,
-          unchecked = this.$el.find(".categories input:not(:checked)").map(function(){return $(this).val();}),
-          checked = this.$el.find(".categories input:checked").map(function(){return $(this).val();});
+          unchecked = this.$el.find(".categories input:not(:checked)").map(function(){ return $(this).val(); }),
+          checked = this.$el.find(".categories input:checked").map(function(){ return $(this).val(); });
 
       categories = _.reject(categories, function(f){ return f.field == fieldName; });
 
@@ -126,7 +126,7 @@ define([
 
       categories = _.reject(categories, function(f){ return f.field == fieldName; });
 
-      this.$el.find(".categories input").map(function() {this.checked = false;});
+      this.$el.find(".categories input").map(function() { this.checked = false; });
 
       categories.push({field: fieldName, values: fieldKeys, other: true});
 
@@ -143,7 +143,7 @@ define([
 
       categories = _.reject(categories, function(f){ return f.field == fieldName; });
 
-      this.$el.find(".categories input").map(function() {this.checked = true;});
+      this.$el.find(".categories input").map(function() { this.checked = true; });
 
       categories.push({field: fieldName, values: fieldKeys, other: false});
 
@@ -154,5 +154,4 @@ define([
   });
 
   return MapCategoryControlView;
-
 });

@@ -5,7 +5,6 @@ define([
   'd3',
   'text!templates/scorecards/charts/fueluse.html'
 ], function($, _, Backbone, d3, FuelUseTemplate){
-
   var FuelUseView = Backbone.View.extend({
     className: 'fueluse-chart',
 
@@ -119,7 +118,7 @@ define([
     },
 
     fixPercents: function(fuels, prop) {
-      const values = fuels.map((d,i) => {
+      const values = fuels.map((d, i) => {
         const decimal = +((d[prop].pct_raw % 1));
         const val = Math.floor(d[prop].pct_raw);
         return {
@@ -127,8 +126,8 @@ define([
           val,
           iszero: val === 0,
           decimal: val === 0 ? 1 : decimal
-        }
-      }).sort((a,b) => {
+        };
+      }).sort((a, b) => {
         return b.decimal - a.decimal;
       });
 
@@ -150,7 +149,7 @@ define([
       let zeros_length = zeros.length;
 
       if (zeros_length > 0) {
-        while(zeros_length > 0) {
+        while (zeros_length > 0) {
           zeros_length--;
           values.forEach(d => {
             if (!d.iszero && d.val > 1) {
@@ -205,7 +204,6 @@ define([
         emission_klass: fuels.length === 1 ? 'onefuel' : '',
         cars: this.formatters.fixedOne(total_ghg_emissions / this.TYPICAL_CAR_EMMISSION)
       };
-
     },
 
     getLabelSizes: function(labels) {
@@ -277,7 +275,6 @@ define([
 
       const barLabels = chart.select('.fc-bars').selectAll('.fc-bar');
       this.hideLabels(barLabels);
-
     },
 
     render: function(){

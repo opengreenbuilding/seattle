@@ -2,7 +2,6 @@ define([
   'underscore',
   'backbone',
 ], function(_, Backbone) {
-
   var urlTemplate = _.template(
     "https://<%= cartoDbUser %>.carto.com/api/v2/sql"
   );
@@ -54,16 +53,12 @@ define([
       return false;
     }
     // Handle situations where there's only a min or only a max
-    if (range.min && range.max)
-      return (_value >= range.min && _value <= range.max);
-    if (range.min)
-      return (_value >= range.min);
-    if (range.max)
-      return (_value <= range.max);
+    if (range.min && range.max) { return (_value >= range.min && _value <= range.max); }
+    if (range.min) { return (_value >= range.min); }
+    if (range.max) { return (_value <= range.max); }
   }
 
   function cityBuildingsFilterizer(buildings, categories, ranges) {
-
     var normalizedCategories = normalizeCityBuildingCategories(categories);
     var normalizedRanges = normalizeCityBuildingRanges(ranges);
 
@@ -100,12 +95,9 @@ define([
     prefix = prefix || '';
     return _.map(this.ranges, function(range) {
       // Handle situations where there's only a min or only a max
-      if (range.min && range.max)
-        return prefix + range.field + " BETWEEN " + range.min + " AND " + range.max;
-      if (range.min)
-        return prefix + range.field + " >= " + range.min;
-      if (range.max)
-        return prefix + range.field + " <= " + range.max;
+      if (range.min && range.max) { return prefix + range.field + " BETWEEN " + range.min + " AND " + range.max; }
+      if (range.min) { return prefix + range.field + " >= " + range.min; }
+      if (range.max) { return prefix + range.field + " <= " + range.max; }
     });
   };
 

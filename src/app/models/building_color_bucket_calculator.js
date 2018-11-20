@@ -21,7 +21,6 @@ define([
   };
 
 
-
   BuildingColorBucketCalculator.prototype.calcBucketStops = function() {
     const range = this.colorStops;
     const buckets = this.buckets;
@@ -61,9 +60,8 @@ define([
         }
         return `[${fieldName}>=${min}]{${cssFillType}:${stop}}`;
       });
-
     } else {
-      css = this.memoized.cartoCSS[this.fieldName] = _.map(stops, (stop) => {
+      css = this.memoized.cartoCSS[this.fieldName] = _.map(stops, stop => {
         const min = _.min(gradient.invertExtent(stop));
         return `[${fieldName}>=${min}]{${cssFillType}:${stop}}`;
       });
@@ -77,7 +75,7 @@ define([
     */
 
     return css;
-  }
+  };
 
   BuildingColorBucketCalculator.prototype.getFieldValues = function() {
     if (this.memoized.fieldValues.hasOwnProperty(this.fieldName)) {
@@ -132,12 +130,12 @@ define([
   // Calculated in constructor
   BuildingColorBucketCalculator.prototype.toBucketStops = function() {
     return this.memoized.bucketStops;
-  }
+  };
 
   // Calculated in constructor
   BuildingColorBucketCalculator.prototype.toGradientStops = function() {
     return this.memoized.gradientStops;
-  }
+  };
 
   BuildingColorBucketCalculator.prototype.toCartoCSS = function() {
     return this.cartoCSS();

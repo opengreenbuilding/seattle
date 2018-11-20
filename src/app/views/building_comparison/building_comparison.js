@@ -8,8 +8,7 @@ define([
   'views/charts/histogram',
   'text!templates/building_comparison/table_head.html',
   'text!templates/building_comparison/table_body.html'
-], function($, _, Backbone, BuildingComparator, BuildingColorBucketCalculator, BuildingBucketCalculator, HistogramView, TableHeadTemplate,TableBodyRowsTemplate){
-
+], function($, _, Backbone, BuildingComparator, BuildingColorBucketCalculator, BuildingBucketCalculator, HistogramView, TableHeadTemplate, TableBodyRowsTemplate){
   var ReportTranslator = function(buildingId, buildingFields, buildings, gradientCalculators) {
     this.buildingId = buildingId;
     this.buildingFields = buildingFields;
@@ -55,7 +54,6 @@ define([
       this.lookup[id].metrics = metrics;
       this.lookup[id].metrichash = metrichash;
     }, this);
-
   };
 
   ReportTranslator.prototype.toRows = function(buildings) {
@@ -73,13 +71,13 @@ define([
 
   MetricAverageCalculator.prototype.calculateField = function(field){
     var fieldName = field.field_name,
-        values = _.map(this.buildings, function(building){return building.get(fieldName);}),
+        values = _.map(this.buildings, function(building){ return building.get(fieldName); }),
         median = Math.round(d3.median(values) * 10) / 10,
         gradientCalculator = this.gradientCalculators[fieldName];
 
     return _.extend({}, field, {
       median: median,
-      isYear: (field.field_name == 'yearbuilt'),  // TODO: don't hardcode this. Use isYear attribute instead.
+      isYear: (field.field_name == 'yearbuilt'), // TODO: don't hardcode this. Use isYear attribute instead.
       color: gradientCalculator.toColor(median)
     });
   };
@@ -142,7 +140,7 @@ define([
     var allValidFields = _.intersection(this.metrics.concat([this.newField]), this.cityFields),
         lastValidField = _.last(allValidFields);
     if (allValidFields.length > 5) {
-      allValidFields = _.first(allValidFields,4).concat([lastValidField]);
+      allValidFields = _.first(allValidFields, 4).concat([lastValidField]);
     }
     return allValidFields;
   };
@@ -242,14 +240,14 @@ define([
     onScroll: function() {
       var $container = this.$el.find('.building-report-header-container'),
           topOfScreen = $(window).scrollTop(),
-          topOfTable  = $container.offset().top,
+          topOfTable = $container.offset().top,
           scrolledPastTableHead = topOfScreen > topOfTable;
 
       $container.toggleClass('fixed', scrolledPastTableHead);
     },
 
     onLayerChange: function() {
-      if(!this.state.get('city')) { return; }
+      if (!this.state.get('city')) { return; }
 
       var metrics = this.state.get('metrics'),
           newLayer = this.state.get('layer'),
@@ -333,9 +331,9 @@ define([
     },
 
     events: {
-      'click .remove' : 'removeMetric',
-      'click label' : 'onSortClick',
-      'change input' : 'changeActiveMetric',
+      'click .remove': 'removeMetric',
+      'click label': 'onSortClick',
+      'change input': 'changeActiveMetric',
       'click tbody tr': 'onRowClick'
     },
 
@@ -359,7 +357,7 @@ define([
           metrics = this.state.get('metrics');
 
       if (metrics.length == 1) { return false; }
-      if(removedField == sortedField) { sortedField = metrics[0]; }
+      if (removedField == sortedField) { sortedField = metrics[0]; }
       metrics = _.without(metrics, removedField);
       this.state.set({metrics: metrics, sort: sortedField});
     },
@@ -403,5 +401,4 @@ define([
   });
 
   return BuildingComparisonView;
-
 });

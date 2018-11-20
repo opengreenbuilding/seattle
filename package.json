@@ -11,8 +11,7 @@
     "dev": "npm run clean && parallelshell 'npm run watch' 'npm run start'",
     "copy-lib": "gulp copy-lib",
     "dist": "npm run clean && gulp",
-    "deploy": "npm run dist && gulp deploy",
-    "postinstall": "npm run dist"
+    "deploy": "npm run dist && gulp deploy"
   },
   "repository": {
     "type": "git",

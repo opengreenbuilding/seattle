@@ -39,8 +39,9 @@ function generateBuildingObject(cb) {
         source_eui: Math.floor(randomNumber(1, 100)),
         energy_star_score: Math.floor(randomNumber(1, 100)),
         total_ghg_emissions: Math.floor(randomNumber(1, 100)),
-        total_ghg_emissions_intensity: Math.floor(randomNumber(1, 100))
-       }
+        total_ghg_emissions_intensity: Math.floor(randomNumber(1, 100)),
+        id: Math.floor(randomNumber(1, 1000))
+      }
     })
     cb(null, dataset);
 }
@@ -86,10 +87,10 @@ function normalizeBuildingData(dataset, cb) {
     let normalizedBuildingsObj = dataset.map(building => {
         return {
             ...building,
-            latitude: shiftCoordinates(building.LAT_LONG[0], 3),
-            longitude: shiftCoordinates(building.LAT_LONG[1], -3),
+            latitude: building.LAT_LONG[0],
+            longitude: building.LAT_LONG[1],
             city: "Springfield",
-            year: 2016,
+            year: 2015,
             reported_address: building.PROPERTY_ADDRESS,
             property_type: building.PRIMARY_USE,
             property_name: building.NOTES,

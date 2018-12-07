@@ -14,13 +14,14 @@ define([
       this.$applyTo = $('.main-container');
 
       this.listenTo(this.state, 'change:building_compare_active', this.onCompareChange );
+      this.listenTo(this.state, 'change:building_compare_active', this.onScreenResize );
       this.listenTo(this.state, 'change:allbuildings', this.render);
       this.listenTo(this.state, 'change:selected_buildings', this.render);
       this.listenTo(this.state, 'change:categories', this.onCategoryChange);
 
       this.propertyTypeKey = 'property_type';
       this._lastPropertyType = null;
-
+      
       this.render();
     },
 

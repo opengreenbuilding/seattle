@@ -5,13 +5,13 @@
   "main": "gulpfile.js",
   "scripts": {
     "test": "jasmine",
-    "watch": "gulp watch",
-    "start": "gulp connect",
+    "watch": "$(npm bin)/gulp watch",
+    "start": "$(npm bin)/gulp connect",
     "clean": "rm -rf dist/",
     "dev": "npm run clean && parallelshell 'npm run watch' 'npm run start'",
-    "copy-lib": "gulp copy-lib",
-    "dist": "npm run clean && gulp",
-    "deploy": "npm run dist && gulp deploy"
+    "copy-lib": "$(npm bin)/gulp copy-lib",
+    "dist": "npm run clean && $(npm bin)/gulp",
+    "deploy": "npm run dist && $(npm bin)/gulp deploy"
   },
   "repository": {
     "type": "git",

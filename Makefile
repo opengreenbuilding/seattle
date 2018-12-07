@@ -2,6 +2,7 @@ all: build
 
 SRC=$(shell find src)
 CITY=richmond
+GULP=$(shell npm bin)/gulp
 
 test:
 	npm run test
@@ -16,7 +17,7 @@ server:
 	@echo "warn: no server component; just statically hosted via apache"
 
 build: $(SRC)
-	gulp --city $(CITY)
+	$(GULP) --city $(CITY)
 
 clean:
 	rm -rf dist
